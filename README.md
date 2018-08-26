@@ -7,6 +7,9 @@ This project consists of extending on the Eclipse CheckStyle plugin to detect st
 The team consists of:
 
 Joshua Feltman
+
 Matthew Johnson
+
 Andrew Fallin
+
 Benjamin Hamlin
