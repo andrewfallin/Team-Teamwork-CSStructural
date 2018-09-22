@@ -1,0 +1,1 @@
+Folder holding Requirements Specification documents for our project.
