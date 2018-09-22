@@ -6,6 +6,7 @@
 This project consists of extending on the Eclipse CheckStyle plugin to detect structural metrics.
 
 The following structural metrics are to be tracked: 
+
 • Halstead Length is the sum of the total number of operators and operand [1,2]
 
 • Halstead Vocabulary is the sum of the number of unique operators and unique operands [1,2]
