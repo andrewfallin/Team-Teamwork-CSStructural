@@ -17,7 +17,7 @@ The following structural metrics are to be tracked:
 
 • Halstead Effort is the difficulty multiplied by the volume. Effort = DV. Effort was intended as a suggestion for how long code review might take [1,2]
 
-• Number of comments [3]
+• ~~Number of comments [3]~~
 
 • Number of lines of comments [3]
 
