@@ -17,9 +17,9 @@ The following structural metrics are to be tracked:
 
 • Halstead Effort is the difficulty multiplied by the volume. Effort = DV. Effort was intended as a suggestion for how long code review might take [1,2]
 
-• ~~Number of comments [3]~~
+• ~~Number of comments [3]~~ Matt
 
-• ~~Number of lines of comments [3]~~
+• ~~Number of lines of comments [3]~~ Matt
 
 • Number of looping statements [3]
 
@@ -29,13 +29,13 @@ The following structural metrics are to be tracked:
 
 • Number of expressions [3]
 
-• ~~Number of variable declarations [4]~~
+• ~~Number of variable declarations [4]~~ Matt
 
-• External Method references are the number of methods called from an external class [4]
+• External Method references are the number of methods called from an external class [4] Matt
 
-• Local method references are the number of methods called from the same class [4]
+• Local method references are the number of methods called from the same class [4] Matt
 
-• Number of casts
+• Number of casts 
 
 • Maintainability Index measures how maintainable the source code is.
 
