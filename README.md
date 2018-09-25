@@ -44,7 +44,8 @@ The following structural metrics are to be tracked:
 Joshua Feltman - joshua.feltman@wsu.edu
 
 Matthew Johnson - matthew.j.johnson@wsu.edu
-
+  *A large amount of project commits are from matthew changing/moving git directories and readme's. Need only count code upload commits for deliverable 1.*
+  
 Andrew Fallin - andrew.fallin@wsu.edu
 
 Benjamin Hamlin - benjamin.hamlin@wsu.edu
