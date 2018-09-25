@@ -1,3 +1,4 @@
+DO NOT PUT checkstyle-metadata.xml, checkstyle-metadata.properties, messages.properties, or sample_checks.xml HERE. WE WILL MAKE THESE FILES TOGETHER AT THE END. 
 Each file here should be a class, nothing more or less.
 There does not need to be 14+ files (classes) here. Aim to cram as much logic into one class as possible as we defined in our design docs.
 Your file should be named accordingly to your class.
