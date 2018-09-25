@@ -1,0 +1,4 @@
+Each file here should be a class, nothing more or less.
+There does not need to be 14+ files (classes) here. Aim to cram as much logic into one class as possible as we defined in our design docs.
+Your file should be named accordingly to your class.
+Cross out what you have done from the readme if your check is functional.
