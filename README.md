@@ -19,7 +19,7 @@ The following structural metrics are to be tracked:
 
 • ~~Number of comments [3]~~
 
-• Number of lines of comments [3]
+• ~~Number of lines of comments [3]~~
 
 • Number of looping statements [3]
 
@@ -44,7 +44,7 @@ The following structural metrics are to be tracked:
 Joshua Feltman - joshua.feltman@wsu.edu
 
 Matthew Johnson - matthew.j.johnson@wsu.edu
-  *A large amount of project commits are from matthew changing/moving git directories and readme's. Need only count code upload commits for deliverable 1.*
+  *A large amount of project commits are from matthew changing/moving git directories and readme's. Need only count code upload commits for deliverable 1. Matt used the GitHub Web client to do this. Dont be a matt. Use the command line.*
   
 Andrew Fallin - andrew.fallin@wsu.edu
 
