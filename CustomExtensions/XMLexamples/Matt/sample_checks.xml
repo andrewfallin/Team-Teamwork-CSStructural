@@ -26,6 +26,11 @@
             <message key="commentcount" value="IDK what to put here." />
         </module>
         
+        <module name="CommentLinesCheck">
+            <property name="count" value="0" />
+            <message key="commentlinescount" value="IDK what to put here." />
+        </module>
+        
         <!-- <module name="LineLength"> <property name="max" value="${maxLineLength}"/> </module> -->
 
         <module name="Regexp">

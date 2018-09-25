@@ -17,7 +17,7 @@
         
         <rule-metadata name="%VariableDeclarationCheck.name" internal-name="VariableDeclarationCheck" parent="TreeWalker">
             <alternative-name internal-name="net.sf.eclipsecs.sample.checks.VariableDeclarationCheck" />
-            <description>%MethodLimit.desc</description>
+            <description>%VariableDeclarationCheck.desc</description>
             <property-metadata name="count" datatype="Integer" default-value="0">
                 <description>The count of defined variables.</description>
             </property-metadata>
@@ -26,9 +26,18 @@
         
         <rule-metadata name="%CommentCountCheck.name" internal-name="CommentCountCheck" parent="TreeWalker">
             <alternative-name internal-name="net.sf.eclipsecs.sample.checks.CommentCountCheck" />
-            <description>%MethodLimit.desc</description>
+            <description>%CommentCountCheck.desc</description>
             <property-metadata name="count" datatype="Integer" default-value="0">
                 <description>The count of comments.</description>
+            </property-metadata>
+            <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
+        </rule-metadata>
+        
+        <rule-metadata name="%CommentLinesCheck.name" internal-name="CommentLinesCheck" parent="TreeWalker">
+            <alternative-name internal-name="net.sf.eclipsecs.sample.checks.CommentLinesCheck" />
+            <description>%CommentLinesCheck.desc</description>
+            <property-metadata name="count" datatype="Integer" default-value="0">
+                <description>The count of lines of comments.</description>
             </property-metadata>
             <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
         </rule-metadata>
