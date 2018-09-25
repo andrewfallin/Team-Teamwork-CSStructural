@@ -35,9 +35,9 @@ The following structural metrics are to be tracked:
 
 • Local method references are the number of methods called from the same class [4] Matt
 
-• Number of casts 
+• Number of casts Ben
 
-• Maintainability Index measures how maintainable the source code is.
+• Maintainability Index measures how maintainable the source code is. Ben
 
 ## Team Members
 
