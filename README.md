@@ -29,7 +29,7 @@ The following structural metrics are to be tracked:
 
 • Number of expressions [3]
 
-• Number of variable declarations [4]
+• ~~Number of variable declarations [4]
 
 • External Method references are the number of methods called from an external class [4]
 
