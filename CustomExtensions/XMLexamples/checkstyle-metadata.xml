@@ -24,5 +24,14 @@
             <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
         </rule-metadata>
         
+        <rule-metadata name="%CommentCountCheck.name" internal-name="CommentCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="net.sf.eclipsecs.sample.checks.CommentCountCheck" />
+            <description>%MethodLimit.desc</description>
+            <property-metadata name="count" datatype="Integer" default-value="0">
+                <description>The count of comments.</description>
+            </property-metadata>
+            <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
+        </rule-metadata>
+        
     </rule-group-metadata>
 </checkstyle-metadata>
