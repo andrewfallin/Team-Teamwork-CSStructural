@@ -42,5 +42,17 @@
             <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
         </rule-metadata>
         
+        <rule-metadata name="%MethodRefsCheck.name" internal-name="MethodRefsCheck" parent="TreeWalker">
+            <alternative-name internal-name="net.sf.eclipsecs.sample.checks.MethodRefsCheck" />
+            <description>%MethodRefsCheck.desc</description>
+            <property-metadata name="countLocals" datatype="Integer" default-value="0">
+                <description>The count of lcoal method refs.</description>
+            </property-metadata>
+            <property-metadata name="countExternals" datatype="Integer" default-value="0">
+                <description>The count of external method refs.</description>
+            </property-metadata>
+            <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
+        </rule-metadata>
+        
     </rule-group-metadata>
 </checkstyle-metadata>
