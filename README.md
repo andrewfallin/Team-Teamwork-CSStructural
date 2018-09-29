@@ -21,13 +21,13 @@ The following structural metrics are to be tracked:
 
 • ~~Number of lines of comments [3] Matt~~
 
-• Number of looping statements [3] Andrew
+• ~~Number of looping statements [3] Andrew~~
 
 • ~~Number of operators [3]~~ Josh
 
 • ~~Number of operands [3]~~ Josh
 
-• Number of expressions [3] Andrew
+• ~~Number of expressions [3] Andrew~~
 
 • ~~Number of variable declarations [4] Matt~~
 
