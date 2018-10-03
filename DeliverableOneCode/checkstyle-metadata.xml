@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE checkstyle-metadata PUBLIC
+"-//eclipse-cs//DTD Check Metadata 1.1//EN"
+"http://eclipse-cs.sourceforge.net/dtds/checkstyle-metadata_1_1.dtd">
+<checkstyle-metadata>
+    <rule-group-metadata name="My custom checks"  priority="1600">
+        <description>%MyCustomChecks.desc</description>
+
+        <rule-metadata name="%MethodLimit.name" internal-name="MethodLimit" parent="TreeWalker">
+            <alternative-name internal-name="net.sf.eclipsecs.sample.checks.MethodLimitCheck" />
+            <description>%MethodLimit.desc</description>
+            <property-metadata name="max" datatype="Integer" default-value="30">
+                <description>The maximum number of allowed methods.</description>
+            </property-metadata>
+            <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
+        </rule-metadata>
+            
+        <rule-metadata name="%SuperCheck.name" internal-name="SuperCheck" parent="TreeWalker">
+            <alternative-name internal-name="net.sf.eclipsecs.sample.checks.SuperCheck" />
+            <description>%SuperCheck.desc</description>
+            <property-metadata name="countLocals" datatype="Integer" default-value="0">
+                <description>The count of lcoal method refs.</description>
+            </property-metadata>
+            <property-metadata name="countExternals" datatype="Integer" default-value="0">
+                <description>The count of external method refs.</description>
+            </property-metadata>
+            <property-metadata name="CommentCount" datatype="Integer" default-value="0">
+                <description>The count of comments.</description>
+            </property-metadata>
+            <property-metadata name="CommentLinesCount" datatype="Integer" default-value="0">
+                <description>The count of lines of comments.</description>
+            </property-metadata>
+            <property-metadata name="VariableCount" datatype="Integer" default-value="0">
+                <description>The count of variables.</description>
+            </property-metadata>
+            <property-metadata name="LoopCount" datatype="Integer" default-value="0">
+                <description>The count of loops.</description>
+            </property-metadata>
+            <property-metadata name="ExpCount" datatype="Integer" default-value="0">
+                <description>The count of expressions.</description>
+            </property-metadata>
+            <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
+        </rule-metadata>
+        
+    </rule-group-metadata>
+</checkstyle-metadata>
