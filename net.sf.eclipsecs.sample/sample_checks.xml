@@ -52,6 +52,13 @@
             <message key="loopscount" value="NA" />
             <property name="ExpCount" value="0" />
             <message key="numberofexpressions" value="NA" />
+			<property name="TypeCastCount" value="0" />
+            <message key="typecastcount" value="NA" />
+        </module>
+        
+        <module name="MaintainabilityIndex">
+        	<property name="typeCastCount" value="0"/>
+        	<message key="maintainabilityindex" value="NA" />
         </module>
         
         <!-- <module name="LineLength"> <property name="max" value="${maxLineLength}"/> </module> -->

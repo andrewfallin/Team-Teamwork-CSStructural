@@ -17,6 +17,7 @@ public class SuperCheck extends AbstractCheck {
   private int VariableCount = 0;
   private int LoopCount = 0;
   private int ExpCount = 0;
+  private int typeCastCount = 0;
   
   //private int refcount = 0;
   private int countLocals = 0;
@@ -35,7 +36,7 @@ public class SuperCheck extends AbstractCheck {
                      TokenTypes.METHOD_CALL, TokenTypes.METHOD_REF, TokenTypes.METHOD_DEF,
                      TokenTypes.VARIABLE_DEF,
                      TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE,
-                     TokenTypes.EXPR};
+                     TokenTypes.EXPR, TokenTypes.TYPECAST};
   }
 
   @Override
@@ -49,16 +50,17 @@ public class SuperCheck extends AbstractCheck {
                       TokenTypes.METHOD_CALL, TokenTypes.METHOD_REF, TokenTypes.METHOD_DEF,
                       TokenTypes.VARIABLE_DEF,
                       TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE,
-                      TokenTypes.EXPR};
+                      TokenTypes.EXPR, TokenTypes.TYPECAST};
   }
 
   @Override
   public void visitToken(DetailAST ast) {
+    
     //comment count
-    if(ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) 
+    if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) 
     {
-      this.CommentCount++;
-      this.CommentLinesCount++;
+      CommentCount++;
+      CommentLinesCount++;
     }
 
     // Lines of comments count
@@ -70,17 +72,17 @@ public class SuperCheck extends AbstractCheck {
     if (ast.getType() == TokenTypes.BLOCK_COMMENT_END) 
     {
       end = ast.getLineNo();
-      this.CommentLinesCount += end-begin+1;
+      CommentLinesCount += end-begin+1;
       /*5-4=1. if a comment block begins on 4 and ends on 5, it is spanning two lines. prevent off by one with +1. */
     }
+    
     //external and local refs count
     if (ast.getType() == TokenTypes.METHOD_CALL || ast.getType() == TokenTypes.METHOD_REF)
     {
-      //this.refcount++;//a method is referenced
       //find ident
       if (ast.getFirstChild().getType() == TokenTypes.IDENT)
       {//methodCall()
-        this.all.add(ast.getFirstChild().getText());//add the reference to our list of references we made
+        all.add(ast.getFirstChild().getText());//add the reference to our list of references we made
       }
       else if (ast.getFirstChild().getType() == TokenTypes.DOT)
       {//object.methodCall()
@@ -92,30 +94,39 @@ public class SuperCheck extends AbstractCheck {
         String temp = node.getPreviousSibling().getText();
         if (!locals.contains(temp))
         {
-          this.all.add(node.getText() + "(Ext. Method)");
+          all.add(node.getText() + "(Ext. Method)");
           //add (External Method) to the name of all external methods in case of overriden methods having same name.
         }
       }
     }
+    
     if (ast.getType() == TokenTypes.METHOD_DEF)
     {
     //find ident
-      this.locals.add(ast.getFirstChild().getNextSibling().getNextSibling().getText());//add the name of the locally defined method to this list
+      locals.add(ast.getFirstChild().getNextSibling().getNextSibling().getText());//add the name of the locally defined method to this list
     }
+    
     //variable defs
     if (ast.getType() == TokenTypes.METHOD_DEF)
     {
-      this.VariableCount++;
+      VariableCount++;
     }
+    
     //loop counts
     if (ast.getType() == TokenTypes.LITERAL_FOR || ast.getType() == TokenTypes.LITERAL_WHILE)
     {
-      this.LoopCount++;
+      LoopCount++;
     }
+    
     //exp counts
     if (ast.getType() == TokenTypes.EXPR)
     {
-      this.ExpCount++;
+      ExpCount++;
+    }
+    
+    if (ast.getType() == TokenTypes.TYPECAST)
+    {
+      typeCastCount++;
     }
   }
  
@@ -133,8 +144,8 @@ public class SuperCheck extends AbstractCheck {
     log(ast, "variablecount", VariableCount);
     log(ast, "loopscount", LoopCount);
     log(ast, "numberofexpressions", ExpCount);
+    log(ast, "typecastcount", typeCastCount);
     
-    //refcount = 0;
     countLocals = 0;
     countExternals = 0;
     all.clear();
@@ -144,6 +155,7 @@ public class SuperCheck extends AbstractCheck {
     VariableCount = 0;
     LoopCount = 0;
     ExpCount = 0;
+    typeCastCount = 0;
   }
 
 }

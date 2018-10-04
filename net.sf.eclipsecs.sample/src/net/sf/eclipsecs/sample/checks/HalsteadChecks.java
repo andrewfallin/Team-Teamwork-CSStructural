@@ -10,18 +10,18 @@ import java.util.HashSet;
 
 public class HalsteadChecks extends AbstractCheck {
 
-  private int operatorCount = 0;
-  private int operandCount = 0;
-  private int uniqueOperatorCount = 5;
-  private int uniqueOperandCount = 5;
-  private int halsteadLength = 0;
-  private int halsteadVocabulary = 0;
-  private int halsteadVolume = 0;
-  private int halsteadDifficulty = 0;
-  private int halsteadEffort = 0;
+  protected int operatorCount = 0;
+  protected int operandCount = 0;
+  protected int uniqueOperatorCount = 5;
+  protected int uniqueOperandCount = 5;
+  protected int halsteadLength = 0;
+  protected int halsteadVocabulary = 0;
+  protected int halsteadVolume = 0;
+  protected int halsteadDifficulty = 0;
+  protected int halsteadEffort = 0;
 
-  private Set<Integer> operatorSet = new HashSet<Integer>();
-  private Set<String> operandSet = new HashSet<String>();
+  protected Set<Integer> operatorSet = new HashSet<Integer>();
+  protected Set<String> operandSet = new HashSet<String>();
 
   @Override
   public int[] getAcceptableTokens() {
@@ -93,9 +93,29 @@ public class HalsteadChecks extends AbstractCheck {
   }
   
   public void checkUniqueOperator(DetailAST ast) {
-    if (ast.getType() != TokenTypes.STRING_LITERAL && ast.getType() != TokenTypes.CHAR_LITERAL &&
-            ast.getType() != TokenTypes.NUM_INT && ast.getType() != TokenTypes.NUM_LONG &&
-            ast.getType() != TokenTypes.NUM_DOUBLE && ast.getType() != TokenTypes.NUM_FLOAT)
+    if (ast.getType() == TokenTypes.BAND || ast.getType() == TokenTypes.BNOT ||
+            ast.getType() == TokenTypes.BOR || ast.getType() == TokenTypes.BSR ||
+            ast.getType() == TokenTypes.BXOR || ast.getType() == TokenTypes.DIV ||
+            ast.getType() == TokenTypes.DOT || ast.getType() == TokenTypes.INC ||
+            ast.getType() == TokenTypes.INDEX_OP || ast.getType() == TokenTypes.LITERAL_INSTANCEOF ||
+            ast.getType() == TokenTypes.LNOT || ast.getType() == TokenTypes.MINUS ||
+            ast.getType() == TokenTypes.MOD || ast.getType() == TokenTypes.POST_DEC ||
+            ast.getType() == TokenTypes.PLUS || ast.getType() == TokenTypes.POST_INC ||
+            ast.getType() == TokenTypes.COMMA || ast.getType() == TokenTypes.SL ||
+            ast.getType() == TokenTypes.SR || ast.getType() == TokenTypes.STAR ||
+            ast.getType() == TokenTypes.UNARY_MINUS || ast.getType() == TokenTypes.UNARY_PLUS ||
+            ast.getType() == TokenTypes.DEC || ast.getType() == TokenTypes.ASSIGN || 
+            ast.getType() == TokenTypes.BAND_ASSIGN || ast.getType() == TokenTypes.BOR_ASSIGN || 
+            ast.getType() == TokenTypes.BSR_ASSIGN || ast.getType() == TokenTypes.BXOR_ASSIGN || 
+            ast.getType() == TokenTypes.DIV_ASSIGN || ast.getType() == TokenTypes.EQUAL || 
+            ast.getType() == TokenTypes.GE || ast.getType() == TokenTypes.GT ||
+            ast.getType() == TokenTypes.LAND || ast.getType() == TokenTypes.LE || 
+            ast.getType() == TokenTypes.LOR || ast.getType() == TokenTypes.LT || 
+            ast.getType() == TokenTypes.MINUS_ASSIGN || ast.getType() == TokenTypes.MOD_ASSIGN || 
+            ast.getType() == TokenTypes.NOT_EQUAL || ast.getType() == TokenTypes.PLUS_ASSIGN || 
+            ast.getType() == TokenTypes.QUESTION || ast.getType() == TokenTypes.COLON || 
+            ast.getType() == TokenTypes.SL_ASSIGN || ast.getType() == TokenTypes.SR_ASSIGN || 
+            ast.getType() == TokenTypes.STAR_ASSIGN) 
     {
       if (operatorSet.contains(ast.getType()) == false) 
       {
@@ -188,7 +208,7 @@ public class HalsteadChecks extends AbstractCheck {
     computeHalsteadVolume();
     computeHalsteadDifficulty();
     computeHalsteadEffort();
-      
+
     log(ast, "halsteadeffort", halsteadEffort);
     log(ast, "halsteaddifficulty", halsteadDifficulty);
     log(ast, "halsteadvolume", halsteadVolume);
