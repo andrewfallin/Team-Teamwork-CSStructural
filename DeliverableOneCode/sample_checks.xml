@@ -10,17 +10,55 @@
     </module>
 
     <module name="TreeWalker">
+
+        <module name="MethodLimit">
+            <property name="max" value="1" />
+            <message key="methodlimit" value="Man, only {0} methods allowed." />
+        </module>
+        
+        <module name="HalsteadChecks">
+            <property name="operatorCount" value="0" />
+            <message key="operatorcount" value="NA" />
+            <property name="operandCount" value="0" />
+            <message key="operandCount" value="NA" />
+            <property name="uniqueoperatorcount" value="0" />
+            <message key="uniqueOperatorCount" value="NA" />
+            <property name="uniqueoperandcount" value="0" />
+            <message key="uniqueOperandCount" value="NA" />
+            <property name="halsteadLength" value="0" />
+            <message key="halsteadlength" value="NA" />
+            <property name="halsteadVocabulary" value="0" />
+            <message key="halsteadvocab" value="NA" />
+            <property name="halsteadVolume" value="0" />
+            <message key="halsteadvolume" value="NA" />
+            <property name="halsteadDifficulty" value="0" />
+            <message key="halsteaddifficulty" value="NA" />
+            <property name="halsteadEffort" value="0" />
+            <message key="halsteadeffort" value="NA" />
+        </module>
         
         <module name="SuperCheck">
             <property name="countLocals" value="0" />
+            <message key="localcount" value="NA" />
             <property name="countExternals" value="0" />
+            <message key="externalcount" value="NA" />
             <property name="CommentCount" value="0" />
+			<message key="commentcount" value="NA" />
             <property name="CommentLinesCount" value="0" />
+            <message key="commentlinescount" value="NA" />
             <property name="VariableCount" value="0" />
+			<message key="variablecount" value="NA" />
             <property name="LoopCount" value="0" />
+            <message key="loopscount" value="NA" />
             <property name="ExpCount" value="0" />
-            <property name="LoopCount" value="0" />
-            <message key="refcounts" value="Referee said thats offsides bruh" />
+            <message key="numberofexpressions" value="NA" />
+			<property name="TypeCastCount" value="0" />
+            <message key="typecastcount" value="NA" />
+        </module>
+        
+        <module name="MaintainabilityIndex">
+        	<property name="typeCastCount" value="0"/>
+        	<message key="maintainabilityindex" value="NA" />
         </module>
         
         <!-- <module name="LineLength"> <property name="max" value="${maxLineLength}"/> </module> -->
