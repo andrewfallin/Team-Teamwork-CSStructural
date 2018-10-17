@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/Users/joshfeltman/Downloads/mockito-all-1.10.19.jar"/>
+	<classpathentry kind="lib" path="/Users/joshfeltman/eclipse-workspace/Team-Teamwork-CSStructural/lib/mockito-all-1.10.19.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
