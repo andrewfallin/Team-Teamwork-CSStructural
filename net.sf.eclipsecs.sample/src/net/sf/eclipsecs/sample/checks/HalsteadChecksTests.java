@@ -1,34 +1,34 @@
 package net.sf.eclipsecs.sample.checks;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.*;
-
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.mockito.*;
+
+@Category(IntegrationTest.class)
 public class HalsteadChecksTests {
   
   HalsteadChecks halsteadChecks;
   
-  @BeforeEach
+  @Before
   public void setUp() throws Exception {
     halsteadChecks = new HalsteadChecks();
   }
   
-  @AfterEach
+  @After
   public void tearDown() throws Exception {
     halsteadChecks = null;
   }
   
   @Test
   public void testCheckOperatorAndOperand() {
-    // Need to figure out best way to setup AST
-    // Not sure if this the best way to unit test the checks, will talk to prof on friday
     DetailAST ast = new DetailAST();
     ast.initialize(TokenTypes.EQUAL, "testToken");
     
@@ -47,6 +47,45 @@ public class HalsteadChecksTests {
     halsteadChecks.checkOperandAndOperator(ast);
     assertEquals(1, halsteadChecks.operatorCount);
     assertEquals(1, halsteadChecks.operandCount);
+  }
+  
+  @Test
+  public void testCheckUniqueOperator() {
+    DetailAST ast = new DetailAST();
+    ast.initialize(TokenTypes.EQUAL, "testToken");
+        
+    halsteadChecks.checkUniqueOperator(ast);
+    assertEquals(1, halsteadChecks.operatorSet.size());    
+    
+    ast.initialize(TokenTypes.PLUS, "testTokenTwo");
+    halsteadChecks.checkUniqueOperator(ast);
+    assertEquals(2, halsteadChecks.operatorSet.size()); 
+    
+    // Only unique operators so set should be size 2 not 3
+    ast.initialize(TokenTypes.EQUAL, "testToken");
+    halsteadChecks.checkUniqueOperator(ast);
+    assertEquals(2, halsteadChecks.operatorSet.size()); 
+  }
+  
+  @Test
+  public void testCheckUniqueOperand() {
+    DetailAST ast = new DetailAST();
+    ast.initialize(TokenTypes.STRING_LITERAL, "testToken");
+        
+    halsteadChecks.checkUniqueOperand(ast);
+    assertEquals(1, halsteadChecks.operandSet.size());    
+    
+    ast.initialize(TokenTypes.STRING_LITERAL, "testToken");
+    halsteadChecks.checkUniqueOperand(ast);
+    assertEquals(1, halsteadChecks.operandSet.size()); 
+
+    ast.initialize(TokenTypes.DOT, "testTokenTwo");
+    DetailAST child = new DetailAST();
+    child.initialize(TokenTypes.IDENT, "testIdentifier");
+    ast.addChild(child);
+    
+    halsteadChecks.checkUniqueOperand(ast);
+    assertEquals(2, halsteadChecks.operandSet.size()); 
   }
   
   @Test
