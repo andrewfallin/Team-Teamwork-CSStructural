@@ -21,6 +21,12 @@
             <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
         </rule-metadata>
         
+        <rule-metadata name="%HalsteadChecksIntegration.name" internal-name="HalsteadChecksIntegration" parent="TreeWalker">
+            <alternative-name internal-name="net.sf.eclipsecs.sample.checks.HalsteadChecksIntegration" />
+            <description>%HalsteadChecks.desc</description>
+            <quickfix classname="net.sf.eclipsecs.sample.checks.MethodLimitQuickfix" />
+        </rule-metadata>
+        
         <rule-metadata name="%SuperCheck.name" internal-name="SuperCheck" parent="TreeWalker">
             <alternative-name internal-name="net.sf.eclipsecs.sample.checks.SuperCheck" />
             <description>%SuperCheck.desc</description>

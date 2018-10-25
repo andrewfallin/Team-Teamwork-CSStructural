@@ -21,20 +21,29 @@
     <property name="severity" value="warning"/>
 
     <module name="TreeWalker">
-
+		<!--
         <module name="net.sf.eclipsecs.sample.checks.MethodLimitCheck">
             <property name="max" value="1" />
             <message key="methodlimit" value="Man, only {0} methods allowed." />
         </module>
+        -->
 
+		
         <module name="net.sf.eclipsecs.sample.checks.HalsteadChecks">
         </module>
+        
+        <!--
+        <module name="net.sf.eclipsecs.sample.checks.HalsteadChecksIntegration">
+        </module>
+        -->
 
+		<!-- 
         <module name="net.sf.eclipsecs.sample.checks.SuperCheck">
         </module>
         
         <module name="net.sf.eclipsecs.sample.checks.MaintainabilityIndexCheck">
         </module>
+        -->
         
     </module>
 
