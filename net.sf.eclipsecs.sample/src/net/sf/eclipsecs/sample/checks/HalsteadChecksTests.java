@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mockito.*;
 
-@Category(IntegrationTest.class)
 public class HalsteadChecksTests {
   
   HalsteadChecks halsteadChecks;
