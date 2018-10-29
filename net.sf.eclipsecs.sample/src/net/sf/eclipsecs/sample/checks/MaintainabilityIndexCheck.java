@@ -8,13 +8,15 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class MaintainabilityIndexCheck extends HalsteadChecks {
-  private int cyclo = 1;
-  private int LOC = 0;
-  private int percentComments = 0;
-  private int count = 0;
-  private int begin = 0;
-  private int end = 0;
-  private int MI = 0;
+  protected int cyclo = 1;
+  protected int LOC = 0;
+  protected int percentComments = 0;
+  protected int count = 0;
+  protected int singleline = 0;
+  protected int blockcom = 0;
+  protected int begin = 0;
+  protected int end = 0;
+  protected int MI = 0;
 
   @Override
   public boolean isCommentNodesRequired() {
@@ -52,25 +54,22 @@ public class MaintainabilityIndexCheck extends HalsteadChecks {
     return new int[0];
   }
   
-  @Override
-  public void visitToken(DetailAST ast) {
-    checkOperandAndOperator(ast);
-    checkUniqueOperator(ast);
-    checkUniqueOperand(ast);
+  public void countComments(DetailAST ast) {
     
-    //calculates line comment count for percent comments
     if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
-      count++;
+      singleline++;
     }
     if (ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
       begin = ast.getLineNo();
     }
     if (ast.getType() == TokenTypes.BLOCK_COMMENT_END) {
       end = ast.getLineNo();
-      count += end - begin + 1;
+      blockcom += end - begin + 1;
     }
-    
-    //each decision increases cyclomatic complexity
+    count = blockcom + singleline;
+  }
+  
+  public void getCycloComplexity(DetailAST ast) {
     if (ast.getType() == TokenTypes.QUESTION || ast.getType() == TokenTypes.LITERAL_WHILE
             || ast.getType() == TokenTypes.LITERAL_DO || ast.getType() == TokenTypes.LITERAL_FOR
             || ast.getType() == TokenTypes.LITERAL_IF || ast.getType() == TokenTypes.LITERAL_SWITCH
@@ -78,11 +77,28 @@ public class MaintainabilityIndexCheck extends HalsteadChecks {
             || ast.getType() == TokenTypes.LITERAL_CATCH || ast.getType() == TokenTypes.LOR) {
       cyclo++; 
     }
-    
-    //calculates lines of code
+  }
+  
+  public void countLinesofCode(DetailAST ast) {
     if (ast.getType() == TokenTypes.RCURLY && ast.getColumnNo() == 0) {
       LOC = ast.getLineNo();
     }
+  }
+  
+  @Override
+  public void visitToken(DetailAST ast) {
+    checkOperandAndOperator(ast);
+    checkUniqueOperator(ast);
+    checkUniqueOperand(ast);
+   
+    //calculates line comment count for percent comments
+    countComments(ast);
+    
+    //each decision increases cyclomatic complexity
+    getCycloComplexity(ast);
+    
+    //calculates lines of code
+    countLinesofCode(ast);
   }
   
   public void computePercent() {

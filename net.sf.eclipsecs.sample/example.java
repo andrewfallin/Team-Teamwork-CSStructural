@@ -5,5 +5,10 @@ public class Test {
 
     int a = x + 20;
 
+     if (x < a);
     // one comment
+  
+    /*
+     * Block Comment
+     */
 }
