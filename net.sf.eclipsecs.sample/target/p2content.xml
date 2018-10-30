@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='1'>
+  <unit id='net.sf.eclipsecs.sample' version='8.12.0.201810302117'>
+    <update id='net.sf.eclipsecs.sample' range='[0.0.0,8.12.0.201810302117)' severity='0'/>
+    <properties size='5'>
+      <property name='org.eclipse.equinox.p2.name' value='eclipse-cs Extension Sample Plugin'/>
+      <property name='org.eclipse.equinox.p2.provider' value='Eclipse Checkstyle Plugin Development Team'/>
+      <property name='maven-groupId' value='net.sf.eclipsecs'/>
+      <property name='maven-artifactId' value='net.sf.eclipsecs.sample'/>
+      <property name='maven-version' value='8.12.0-SNAPSHOT'/>
+    </properties>
+    <provides size='3'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='net.sf.eclipsecs.sample' version='8.12.0.201810302117'/>
+      <provided namespace='osgi.bundle' name='net.sf.eclipsecs.sample' version='8.12.0.201810302117'/>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+    </provides>
+    <requires size='9'>
+      <required namespace='osgi.bundle' name='net.sf.eclipsecs.checkstyle' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='net.sf.eclipsecs.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='net.sf.eclipsecs.ui' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.core.resources' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.jdt.core.dom' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.jface.resource' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.jface.text' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.swt.graphics' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.ui' range='0.0.0'/>
+    </requires>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='net.sf.eclipsecs.sample' version='8.12.0.201810302117'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: net.sf.eclipsecs.sample;singleton:=true&#xA;Bundle-Version: 8.12.0.201810302117&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>

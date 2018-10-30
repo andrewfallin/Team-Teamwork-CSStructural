@@ -201,14 +201,14 @@ public class HalsteadChecksIntegration extends AbstractCheck {
   // Stubbing
   @Override
   public void finishTree(DetailAST ast) {
-    uniqueOperatorCount = 2;
-    uniqueOperandCount = 4;
+    uniqueOperatorCount = 4;
+    uniqueOperandCount = 7;
 
-    halsteadLength = 8;
-    halsteadVocabulary = 6;
-    halsteadVolume = 20;
-    halsteadDifficulty = 2; 
-    halsteadEffort = 40;
+    halsteadLength = 19;
+    halsteadVocabulary = 11;
+    halsteadVolume = 65;
+    halsteadDifficulty = 6; 
+    halsteadEffort = 390;
     
     System.out.println("Operator Count: " + operatorCount);
     System.out.println("Operand Count: " + operandCount);

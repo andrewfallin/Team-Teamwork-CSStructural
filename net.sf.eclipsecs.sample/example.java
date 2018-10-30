@@ -5,10 +5,19 @@ public class Test {
 
     int a = x + 20;
 
-     if (x < a);
+    double y = (double)x;
+    
     // one comment
   
     /*
-     * Block Comment
-     */
+    * Block Comment
+    */
+     
+    void main() {
+      foo();
+    }
+     
+    void foo() {
+      for(int i = 0; i < 10; i++) {}
+    }
 }

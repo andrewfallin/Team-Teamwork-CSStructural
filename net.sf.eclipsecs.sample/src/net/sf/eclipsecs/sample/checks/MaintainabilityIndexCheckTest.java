@@ -1,20 +1,15 @@
 package net.sf.eclipsecs.sample.checks;
 
-
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
 import static org.junit.Assert.*;
-//import static org.mockito.Mockito.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
-//import org.mockito.*;
 
 public class MaintainabilityIndexCheckTest {
- 
   MaintainabilityIndexCheck MIC; 
   
   @Before
@@ -30,32 +25,30 @@ public class MaintainabilityIndexCheckTest {
   @Test
   public void countCommentsTest() {
     DetailAST ast = new DetailAST();
+    // Test single line comments
     ast.initialize(TokenTypes.SINGLE_LINE_COMMENT, "testToken");
-    
     MIC.singleline = 0;
     
     MIC.countComments(ast);
     assertEquals(1, MIC.singleline);
     
-    //I have no idea how to get a block comment unit test to work
-    ast.initialize(TokenTypes.BLOCK_COMMENT_BEGIN, "testToken2");
-   
-   MIC.count = 0;
-   MIC.countComments(ast);
-   assertEquals(1, MIC.count);
-   
-   ast.initialize(TokenTypes.BLOCK_COMMENT_END, "testToken3");
-    MIC.count = 0;
-    
+    // test block comments
+    MIC.blockcom = 0;
+    ast.initialize(TokenTypes.BLOCK_COMMENT_BEGIN, "testTokenTwo");
+    ast.setLineNo(4);
     MIC.countComments(ast);
-    assertEquals(1, MIC.blockcom);
     
+    ast.initialize(TokenTypes.BLOCK_COMMENT_END, "testTokenThree");
+    ast.setLineNo(5);
+    MIC.countComments(ast);
+    assertEquals(2, MIC.blockcom);
     
-   
+    // Total lines of comments
+    assertEquals(3, MIC.count);
   }
   
   @Test
-  public void CyclomaticTest() {
+  public void cyclomaticTest() {
     DetailAST ast = new DetailAST();
     ast.initialize(TokenTypes.LITERAL_IF, "testToken");
     
@@ -66,14 +59,16 @@ public class MaintainabilityIndexCheckTest {
   }
   
   @Test
-  public void linesofcodetest() {
+  public void linesOfCodeTest() {
     DetailAST ast = new DetailAST();
     ast.initialize(TokenTypes.RCURLY, "testToken");
+    ast.setColumnNo(0);
+    ast.setLineNo(35);
     
     MIC.LOC = 0;
     
     MIC.countLinesofCode(ast);
-    assertEquals(14, MIC.LOC);
+    assertEquals(35, MIC.LOC);
   }
   
 }
