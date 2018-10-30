@@ -30,11 +30,32 @@ public class SuperCheckTests {
   public void testCheckCommentLineCount() {
     DetailAST ast = new DetailAST();
     ast.initialize(TokenTypes.SINGLE_LINE_COMMENT, "testToken");
+    superChecks.CommentLinesCount = 0;
     
+    superChecks.computeCommentLineCount(ast);
+    assertEquals(1, superChecks.CommentLinesCount);
+    
+    ast.initialize(TokenTypes.BLOCK_COMMENT_BEGIN, "testTokenTwo");
+    ast.setLineNo(4);
+    superChecks.computeCommentLineCount(ast);
+    ast.initialize(TokenTypes.BLOCK_COMMENT_END, "testTokenThree");
+    ast.setLineNo(5);
+    superChecks.computeCommentLineCount(ast);
+    assertEquals(3, superChecks.CommentLinesCount);
+  }
+  
+  @Test
+  public void testCheckCommentCount() {
+    DetailAST ast = new DetailAST();
+    ast.initialize(TokenTypes.SINGLE_LINE_COMMENT, "testToken");  
     superChecks.CommentCount = 0;
     
     superChecks.computeCommentCount(ast);
     assertEquals(1, superChecks.CommentCount);
+    
+    ast.initialize(TokenTypes.BLOCK_COMMENT_END, "testTokenTwo");
+    superChecks.computeCommentCount(ast);
+    assertEquals(2, superChecks.CommentCount);
   }
   
   @Test
