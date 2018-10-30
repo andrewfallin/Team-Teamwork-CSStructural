@@ -9,21 +9,21 @@ import java.util.List;
 
 public class SuperCheck extends AbstractCheck {
 
-  private int CommentCount = 0;
-  private int CommentLinesCount = 0;
-  private int begin = 0;
-  private int end = 0;
+  protected int CommentCount = 0;
+  protected int CommentLinesCount = 0;
+  protected int begin = 0;
+  protected int end = 0;
   
-  private int VariableCount = 0;
-  private int LoopCount = 0;
-  private int ExpCount = 0;
-  private int typeCastCount = 0;
+  protected int VariableCount = 0;
+  protected int LoopCount = 0;
+  protected int ExpCount = 0;
+  protected int typeCastCount = 0;
   
   //private int refcount = 0;
-  private int countLocals = 0;
-  private int countExternals = 0;
-  List<String> all = new ArrayList<String>();
-  List<String> locals = new ArrayList<String>();
+  protected int countLocals = 0;
+  protected int countExternals = 0;
+  protected List<String> all = new ArrayList<String>();
+  protected List<String> locals = new ArrayList<String>();
   
   @Override
   public boolean isCommentNodesRequired() {
@@ -53,17 +53,19 @@ public class SuperCheck extends AbstractCheck {
                       TokenTypes.EXPR, TokenTypes.TYPECAST};
   }
 
-  @Override
-  public void visitToken(DetailAST ast) {
-    
-    //comment count
-    if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) 
+  public void computeCommentCount(DetailAST ast) {
+    if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT || ast.getType() == TokenTypes.BLOCK_COMMENT_END) 
     {
       CommentCount++;
+    }
+  }
+  
+  public void computeCommentLineCount(DetailAST ast) {
+    // Lines of comments count
+    if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) 
+    {
       CommentLinesCount++;
     }
-
-    // Lines of comments count
     if (ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN)
     {
       begin = ast.getLineNo();
@@ -75,8 +77,14 @@ public class SuperCheck extends AbstractCheck {
       CommentLinesCount += end-begin+1;
       /*5-4=1. if a comment block begins on 4 and ends on 5, it is spanning two lines. prevent off by one with +1. */
     }
-    
-    //external and local refs count
+  }
+  
+  public void checkRefCounts(DetailAST ast) {
+    if (ast.getType() == TokenTypes.METHOD_DEF)
+    {
+    //find ident
+      locals.add(ast.getFirstChild().getNextSibling().getNextSibling().getText());//add the name of the locally defined method to this list
+    }
     if (ast.getType() == TokenTypes.METHOD_CALL || ast.getType() == TokenTypes.METHOD_REF)
     {
       //find ident
@@ -99,43 +107,57 @@ public class SuperCheck extends AbstractCheck {
         }
       }
     }
-    
-    if (ast.getType() == TokenTypes.METHOD_DEF)
-    {
-    //find ident
-      locals.add(ast.getFirstChild().getNextSibling().getNextSibling().getText());//add the name of the locally defined method to this list
-    }
-    
-    //variable defs
+  }
+  
+  public void computeRefCounts() {
+    List<String> commons = new ArrayList<String>(locals);
+    commons.retainAll(all);
+    countLocals = commons.size() + locals.size();
+    countExternals = all.size() - countLocals;
+  }
+  
+  public void computeVariableDefCount(DetailAST ast) {
     if (ast.getType() == TokenTypes.METHOD_DEF)
     {
       VariableCount++;
     }
-    
-    //loop counts
+  }
+  
+  public void computeLoopCount(DetailAST ast) {
     if (ast.getType() == TokenTypes.LITERAL_FOR || ast.getType() == TokenTypes.LITERAL_WHILE)
     {
       LoopCount++;
     }
-    
-    //exp counts
+  }
+  
+  public void computeExpressionCount(DetailAST ast) {
     if (ast.getType() == TokenTypes.EXPR)
     {
       ExpCount++;
     }
-    
+  }
+  
+  public void computeTypeCastCount(DetailAST ast) {
     if (ast.getType() == TokenTypes.TYPECAST)
     {
       typeCastCount++;
     }
   }
+  
+  @Override
+  public void visitToken(DetailAST ast) {
+      this.computeCommentCount(ast);
+      this.computeCommentLineCount(ast);
+      this.computeExpressionCount(ast);
+      this.computeLoopCount(ast);
+      this.computeTypeCastCount(ast);
+      this.computeVariableDefCount(ast);
+      this.checkRefCounts(ast);
+  }
  
   @Override
   public void finishTree(DetailAST ast) {
-    List<String> commons = new ArrayList<String>(all);
-    commons.retainAll(locals);
-    countLocals = commons.size();
-    countExternals = all.size() - countLocals;
+    this.computeRefCounts();
     
     log(ast, "commentcount", CommentCount);
     log(ast, "commentlinescount", CommentLinesCount);
@@ -146,10 +168,10 @@ public class SuperCheck extends AbstractCheck {
     log(ast, "numberofexpressions", ExpCount);
     log(ast, "typecastcount", typeCastCount);
     
-    countLocals = 0;
-    countExternals = 0;
     all.clear();
     locals.clear();
+    countLocals = 0;
+    countExternals = 0;
     CommentCount = 0;
     CommentLinesCount = 0;
     VariableCount = 0;
